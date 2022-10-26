@@ -90,6 +90,32 @@ You can download the pretrained models used/developed in our paper as follows:
  
 </tbody></table>
 
+## Fine-tuing of pre-trained models on target task
+1. Download the desired pre-trained model.
+2. Download the desired dataset; you can simply add any other dataset that you wish.
+3. Run the following command by the desired parameters. For example, to finetune our pre-trained ImageNet &#8594; X-rays(926K) model on ChestX-ray14, run:
+```bash
+python main_classification.py --data_set ChestXray14  \
+--model swin_base \
+--init simmim \
+--pretrained_weights [PATH_TO_MODEL]/simmim_swinb_ImageNet_Xray926k.pth \
+--data_dir [PATH_TO_DATASET] \
+--train_list dataset/Xray14_train_official.txt \
+--val_list dataset/Xray14_val_official.txt \
+--test_list dataset/Xray14_test_official.txt \
+--lr 0.01 --opt sgd --epochs 200 --warmup-epochs 0 --batch_size 64
+```
+
+Or, to evaluate the official released ImageNet models from timm on ChestX-ray14, run:
+```bash
+python main_classification.py --data_set ChestXray14  \
+--model vit_base \
+--init imagenet_21k \
+--data_dir [PATH_TO_DATASET] \
+--train_list dataset/Xray14_train_official.txt \
+--val_list dataset/Xray14_val_official.txt \
+--test_list dataset/Xray14_test_official.txt \
+```
 
 ## Acknowledgement
 This research has been supported in part by ASU and Mayo Clinic through a Seed Grant and an Innovation Grant, and in part by the NIH under Award Number R01HL128785. The content is solely the responsi- bility of the authors and does not necessarily represent the official views of the NIH. This work has utilized the GPUs provided in part by the ASU Research Computing and in part by the Extreme Science and Engineering Discovery En- vironment (XSEDE) funded by the National Science Foundation (NSF) under grant numbers: ACI-1548562, ACI-1928147, and ACI-2005632. The content of this paper is covered by patents pending.
