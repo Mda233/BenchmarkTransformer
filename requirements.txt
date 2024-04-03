@@ -8,7 +8,7 @@ scipy
 pydicom
 opencv-python==4.2.0.32
 timm
-transformers==4.30.0
+transformers
 albumentations==0.4.3
 imgaug
 Pillow
